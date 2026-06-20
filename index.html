@@ -1439,7 +1439,8 @@ window.exportarPDF=function(){
   const limit = new Date(hj); limit.setDate(hj.getDate()+7);
   const limitStr = localDateStr(limit);
   const FINS_PDF = ["PAYJOY","ODESCRED","PAYMOBI"];
-  const FIN_C = {"PAYJOY":"#6366f1","ODESCRED":"#10b981","PAYMOBI":"#f59e0b"};
+  const FIN_C = {"PAYJOY":"#0B2A5B","ODESCRED":"#C9A227","PAYMOBI":"#3b82f6"};
+  const ATLAS_NAVY="#0B2A5B", ATLAS_GOLD="#C9A227";
   const fmtBRL = v => new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(v);
   const WEEKDAYS = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
   const MONTHS = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
@@ -1553,26 +1554,26 @@ window.exportarPDF=function(){
       <button onclick="window.print()" style="background:#10b981;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">🖨️ Imprimir / Salvar PDF</button>
       <button id="__btn_download_pdf__" onclick="window.__downloadPdfReport()" style="background:#6366f1;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">⬇️ Baixar PDF</button>
       <button onclick="document.getElementById('__pdf_overlay__').remove();document.getElementById('__pdf_print_style__').remove()" style="background:transparent;color:#94a3b8;border:1px solid #334155;border-radius:7px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit">✕ Fechar</button>
-      <span style="color:#64748b;font-size:12px;margin-left:auto">MercadoFone · ${nomeMesPDF}</span>
+      <span style="color:#64748b;font-size:12px;margin-left:auto">Atlas Recebimentos · ${nomeMesPDF}</span>
     </div>
 
     <div id="__pdf_report_content__" style="width:277mm;margin:0 auto;padding:7mm 8mm;font-family:'Segoe UI',Arial,sans-serif;background:#fff;box-sizing:border-box;">
 
       <!-- CABEÇALHO -->
-      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2.5px solid #0f172a;padding-bottom:8px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2.5px solid #0B2A5B;padding-bottom:8px;margin-bottom:10px;">
         <div>
-          <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#10b981;font-weight:700;margin-bottom:2px">Documento Financeiro Oficial</div>
-          <div style="font-size:22px;font-weight:900;color:#0f172a;line-height:1">RELATÓRIO DE RECEBIMENTOS</div>
-          <div style="font-size:10px;color:#64748b;margin-top:2px">MercadoFone · Facilita Cell · Sistema de Controle Financeiro</div>
+          <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#C9A227;font-weight:700;margin-bottom:2px">Atlas Recebimentos · Documento Oficial</div>
+          <div style="font-size:22px;font-weight:900;color:#0B2A5B;line-height:1">RELATÓRIO DE RECEBIMENTOS</div>
+          <div style="font-size:10px;color:#64748b;margin-top:2px">Atlas Recebimentos · Sistema de Controle Financeiro</div>
         </div>
         <div style="text-align:right">
           <div style="font-size:8px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8">Emitido em</div>
-          <div style="font-size:12px;font-weight:700;color:#0f172a">${now}</div>
+          <div style="font-size:12px;font-weight:700;color:#0B2A5B">${now}</div>
           <div style="font-size:10px;color:#64748b">Por: ${currentUser?.nome||"—"}</div>
           <div style="margin-top:5px;display:flex;gap:5px;justify-content:flex-end">
-            <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:#6366f115;color:#6366f1;border:1px solid #6366f133">● PAYJOY</span>
-            <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:#10b98115;color:#10b981;border:1px solid #10b98133">● ODESCRED</span>
-            <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:#f59e0b15;color:#f59e0b;border:1px solid #f59e0b33">● PAYMOBI</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:#0B2A5B12;color:#0B2A5B;border:1px solid #0B2A5B33">● PAYJOY</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:#C9A22718;color:#9a7d1e;border:1px solid #C9A22744">● ODESCRED</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:10px;background:#3b82f615;color:#3b82f6;border:1px solid #3b82f633">● PAYMOBI</span>
           </div>
         </div>
       </div>
@@ -1580,10 +1581,10 @@ window.exportarPDF=function(){
       <!-- KPIs -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;">
         ${[
-          ["📅 Próx. 7 dias","#6366f1",fmtBRL(total7),"previsão pendente"],
-          ["📊 Semana Atual","#8b5cf6",fmtBRL(semTotal2),semQtd2+" vendas"],
-          ["📋 Vendas do Mês","#f59e0b",fmtBRL(mesTotal2),mesQtd2+" aparelhos"],
-          ["✅ Recebido no Mês","#10b981",fmtBRL(mesRecTotal2),mesRecQtd2+" confirmados"],
+          ["📅 Próx. 7 dias","#0B2A5B",fmtBRL(total7),"previsão pendente"],
+          ["📊 Semana Atual","#103a7a",fmtBRL(semTotal2),semQtd2+" vendas"],
+          ["📋 Vendas do Mês","#9a7d1e",fmtBRL(mesTotal2),mesQtd2+" aparelhos"],
+          ["✅ Recebido no Mês","#15803d",fmtBRL(mesRecTotal2),mesRecQtd2+" confirmados"],
         ].map(([label,cor,valor,sub])=>`
           <div style="border:1.5px solid ${cor}33;border-radius:8px;padding:8px 12px;background:${cor}08;">
             <div style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">${label}</div>
@@ -1597,7 +1598,7 @@ window.exportarPDF=function(){
 
         <!-- COL 1: Próximos 7 dias -->
         <div style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
-          <div style="background:#0f172a;padding:7px 10px;">
+          <div style="background:#0B2A5B;padding:7px 10px;">
             <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px">📅 Previsão — Próx. 7 Dias</div>
             <div style="font-size:9px;color:#64748b;margin-top:1px">${fmtDateFull(hj)} a ${fmtDateFull(limit)}</div>
           </div>
@@ -1610,7 +1611,7 @@ window.exportarPDF=function(){
                   const fins=Object.entries(info.fins).map(([f,v])=>`<span style="font-size:8px;background:${FIN_C[f]||"#334155"}15;color:${FIN_C[f]||"#94a3b8"};border-radius:4px;padding:1px 5px;margin-right:2px">${f.substring(0,3)}: ${fmtBRL(v)}</span>`).join("");
                   return `<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:5px 9px;border-bottom:1px solid #f1f5f9;gap:4px">
                     <div>
-                      <div style="font-size:11px;font-weight:700;color:#0f172a">${wd} ${d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})}</div>
+                      <div style="font-size:11px;font-weight:700;color:#0B2A5B">${wd} ${d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})}</div>
                       <div style="margin-top:2px">${fins}</div>
                     </div>
                     <div style="font-size:11px;font-weight:800;color:#6366f1;white-space:nowrap;font-family:'Courier New',monospace">${fmtBRL(info.total)}</div>
@@ -1628,7 +1629,7 @@ window.exportarPDF=function(){
 
           <!-- Semana -->
           <div style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
-            <div style="background:#0f172a;padding:7px 10px;">
+            <div style="background:#0B2A5B;padding:7px 10px;">
               <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px">📊 Semana Atual</div>
               <div style="font-size:9px;color:#64748b;margin-top:1px">${fmtDateFull(semInicio)} a ${fmtDateFull(semFim)}</div>
             </div>
@@ -1649,7 +1650,7 @@ window.exportarPDF=function(){
                   </tr>`).join("")||`<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-style:italic;padding:8px;font-size:9px">Sem dados</td></tr>`}
               </tbody>
               <tfoot><tr style="background:#f8fafc;border-top:2px solid #e2e8f0">
-                <td style="padding:5px 9px;font-weight:700;color:#0f172a;font-size:10px">TOTAL</td>
+                <td style="padding:5px 9px;font-weight:700;color:#0B2A5B;font-size:10px">TOTAL</td>
                 <td style="text-align:center;padding:5px 6px;font-weight:700;font-size:10px">${semQtd2}</td>
                 <td style="text-align:right;padding:5px 9px;font-weight:800;color:#8b5cf6;font-family:'Courier New',monospace;font-size:11px">${fmtBRL(semTotal2)}</td>
                 <td style="text-align:right;padding:5px 9px;font-size:10px;color:#94a3b8">100%</td>
@@ -1659,7 +1660,7 @@ window.exportarPDF=function(){
 
           <!-- Mês Vendas -->
           <div style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;flex:1;">
-            <div style="background:#0f172a;padding:7px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="background:#0B2A5B;padding:7px 10px;display:flex;justify-content:space-between;align-items:center;">
               <div>
                 <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px">📋 Vendas do Mês — ${nomeMesPDF}</div>
                 <div style="font-size:9px;color:#64748b;margin-top:1px">${fmtDateFull(mesInicio)} a ${fmtDateFull(mesFim2)}</div>
@@ -1686,7 +1687,7 @@ window.exportarPDF=function(){
                   </tr>`).join("")||`<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-style:italic;padding:8px;font-size:9px">Sem dados</td></tr>`}
               </tbody>
               <tfoot><tr style="background:#f8fafc;border-top:2px solid #e2e8f0">
-                <td style="padding:5px 9px;font-weight:700;color:#0f172a;font-size:10px">TOTAL MÊS</td>
+                <td style="padding:5px 9px;font-weight:700;color:#0B2A5B;font-size:10px">TOTAL MÊS</td>
                 <td style="text-align:center;padding:5px 6px;font-weight:700;font-size:10px">${mesQtd2}</td>
                 <td style="text-align:right;padding:5px 9px;font-weight:800;color:#f59e0b;font-family:'Courier New',monospace;font-size:11px">${fmtBRL(mesTotal2)}</td>
                 <td style="text-align:right;padding:5px 9px;font-size:10px;color:#94a3b8">100%</td>
@@ -1743,8 +1744,8 @@ window.exportarPDF=function(){
 
       <!-- RODAPÉ -->
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid #e2e8f0;margin-top:8px;">
-        <div style="font-size:8px;color:#94a3b8">Documento gerado automaticamente · MercadoFone · Facilita Cell · ${now}</div>
-        <div style="font-size:9px;font-weight:700;color:#0f172a">Emitido por: ${currentUser?.nome||"—"}</div>
+        <div style="font-size:8px;color:#94a3b8">Documento gerado automaticamente · Atlas Recebimentos · ${now}</div>
+        <div style="font-size:9px;font-weight:700;color:#0B2A5B">Emitido por: ${currentUser?.nome||"—"}</div>
       </div>
 
     </div>
@@ -2918,34 +2919,31 @@ function renderRelatorio(filtered){
   const fmtSemDia=d=>d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"});
   const agora=new Date().toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
 
+  // ── Paleta Atlas ──
+  const NAVY="#0B2A5B", NAVY2="#103a7a", GOLD="#C9A227", GOLD_SOFT="#E7C97A", INK="#1e293b";
+  const GOLDL="#F3E2A8", BLUEL="#E8F0FB", LINE="#dbe3f0";
+  // Cor por financeira (tons Atlas: azul / dourado / azul claro)
+  const FC={PAYJOY:"#0B2A5B", ODESCRED:"#C9A227", PAYMOBI:"#3b82f6"};
+
   // ── Períodos ──
-  // Semanal = últimos 7 dias corridos (hoje incluso, 6 dias atrás)
   const semIni=new Date(hj); semIni.setDate(hj.getDate()-6);
   const semIniStr=localDateStr(semIni), semFimStr=hjStr;
-  // Mensal = mês corrente (30/31 dias)
   const mesIni=new Date(hj.getFullYear(),hj.getMonth(),1);
   const mesFim=new Date(hj.getFullYear(),hj.getMonth()+1,0);
   const mesIniStr=localDateStr(mesIni), mesFimStr=localDateStr(mesFim);
   const diasNoMes=mesFim.getDate();
 
-  // Acumula previsto (pela data de RECEBIMENTO prevista) e recebido (pela data efetiva)
   function acumular(iniStr,fimStr){
     const prev={}, receb={};
     FINS.forEach(f=>{prev[f]={qtd:0,val:0};receb[f]={qtd:0,val:0};});
     let prevTot=0,prevQtd=0,recTot=0,recQtd=0;
     allSales.forEach(s=>{
       const f=s.financeira; if(!FINS.includes(f)) return;
-      // Previsto: data prevista de recebimento dentro do período
       const rd=s.receiptDate?localDateStr(s.receiptDate):null;
-      if(rd && rd>=iniStr && rd<=fimStr){
-        prev[f].qtd++; prev[f].val+=s.value; prevTot+=s.value; prevQtd++;
-      }
-      // Recebido: efetivamente pago dentro do período
+      if(rd && rd>=iniStr && rd<=fimStr){ prev[f].qtd++; prev[f].val+=s.value; prevTot+=s.value; prevQtd++; }
       if(s.recebido && s.dataRecebimento){
         const dr=localDateStr(s.dataRecebimento);
-        if(dr>=iniStr && dr<=fimStr){
-          receb[f].qtd++; receb[f].val+=s.value; recTot+=s.value; recQtd++;
-        }
+        if(dr>=iniStr && dr<=fimStr){ receb[f].qtd++; receb[f].val+=s.value; recTot+=s.value; recQtd++; }
       }
     });
     return {prev,receb,prevTot,prevQtd,recTot,recQtd};
@@ -2953,7 +2951,7 @@ function renderRelatorio(filtered){
   const sem=acumular(semIniStr,semFimStr);
   const mes=acumular(mesIniStr,mesFimStr);
 
-  // Próximos 7 dias (previsão futura)
+  // Próximos 7 dias
   const prox7={};
   const limit=new Date(hj); limit.setDate(hj.getDate()+7);
   const limitStr=localDateStr(limit);
@@ -2969,83 +2967,7 @@ function renderRelatorio(filtered){
   const dias7=Object.entries(prox7).sort();
   const WEEKDAYS=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
 
-  // Helper: linhas de financeira lado a lado (previsto + recebido)
-  function linhasFin(data,corTot){
-    const ativos=FINS.filter(f=>data.prev[f].qtd>0||data.receb[f].qtd>0);
-    if(!ativos.length) return `<tr><td colspan="5" style="text-align:center;color:var(--muted);font-style:italic;padding:18px">Nenhum registro neste período</td></tr>`;
-    return ativos.map(f=>{
-      const c=FIN_COLORS[f]||"#94a3b8";
-      return `<tr>
-        <td style="padding:11px 14px">
-          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c};margin-right:7px"></span>
-          <strong style="color:${c}">${f}</strong>
-        </td>
-        <td style="text-align:center;padding:11px 10px">
-          <span style="background:${c}1f;color:${c};border:1px solid ${c}44;border-radius:20px;padding:2px 11px;font-size:12px;font-weight:700">📱 ${data.prev[f].qtd}</span>
-        </td>
-        <td style="text-align:right;padding:11px 14px;font-family:'Courier New',monospace;font-weight:700;color:${c}">${fmt(data.prev[f].val)}</td>
-        <td style="text-align:center;padding:11px 10px;color:var(--sub)">${data.receb[f].qtd}</td>
-        <td style="text-align:right;padding:11px 14px;font-family:'Courier New',monospace;font-weight:700;color:#22c55e">${fmt(data.receb[f].val)}</td>
-      </tr>`;
-    }).join("");
-  }
-
-  // Bloco de relatório (semanal ou mensal)
-  function blocoRelatorio(titulo,subtitulo,icon,data,corPrim){
-    return `
-    <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--card)">
-      <div style="background:linear-gradient(135deg,${corPrim}18,transparent);padding:18px 20px;border-bottom:2px solid ${corPrim}44">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-          <span style="font-size:22px">${icon}</span>
-          <div>
-            <div style="font-size:14px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.5px">${titulo}</div>
-            <div style="font-size:11px;color:var(--muted)">${subtitulo}</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-          <div style="background:var(--surface);border-radius:10px;padding:10px 12px;text-align:center">
-            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">📱 Aparelhos</div>
-            <div style="font-size:22px;font-weight:800;color:var(--text)">${data.prevQtd}</div>
-          </div>
-          <div style="background:var(--surface);border-radius:10px;padding:10px 12px;text-align:center">
-            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Previsto</div>
-            <div style="font-size:18px;font-weight:800;color:${corPrim};font-family:'Courier New',monospace">${fmt(data.prevTot)}</div>
-          </div>
-          <div style="background:#052e1688;border:1px solid #22c55e33;border-radius:10px;padding:10px 12px;text-align:center">
-            <div style="font-size:10px;color:#86efac;text-transform:uppercase;letter-spacing:1px">✅ Entrou</div>
-            <div style="font-size:18px;font-weight:800;color:#22c55e;font-family:'Courier New',monospace">${fmt(data.recTot)}</div>
-          </div>
-        </div>
-      </div>
-      <div style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;font-size:13px">
-          <thead>
-            <tr style="background:var(--surface)">
-              <th style="text-align:left;padding:9px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)">Financeira</th>
-              <th style="text-align:center;padding:9px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)">📱 Apar.</th>
-              <th style="text-align:right;padding:9px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)">Previsto</th>
-              <th style="text-align:center;padding:9px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#86efac;border-bottom:1px solid var(--border)">Qtd Rec.</th>
-              <th style="text-align:right;padding:9px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#86efac;border-bottom:1px solid var(--border)">✅ Entrou</th>
-            </tr>
-          </thead>
-          <tbody>${linhasFin(data,corPrim)}</tbody>
-          <tfoot>
-            <tr style="background:var(--surface);border-top:2px solid var(--border)">
-              <td style="padding:12px 14px;font-weight:800;color:var(--text)">TOTAL</td>
-              <td style="text-align:center;padding:12px 10px;font-weight:800;color:var(--text)">${data.prevQtd}</td>
-              <td style="text-align:right;padding:12px 14px;font-weight:800;color:${corPrim};font-family:'Courier New',monospace">${fmt(data.prevTot)}</td>
-              <td style="text-align:center;padding:12px 10px;font-weight:800;color:#22c55e">${data.recQtd}</td>
-              <td style="text-align:right;padding:12px 14px;font-weight:800;color:#22c55e;font-family:'Courier New',monospace">${fmt(data.recTot)}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>`;
-  }
-
-  const el=document.getElementById("rel-7dias");
-
-  // ── #7 COMPARATIVO: mês atual vs mês anterior ──
+  // ── Comparativo mês atual vs anterior ──
   const mesAntIni=new Date(hj.getFullYear(),hj.getMonth()-1,1);
   const mesAntFim=new Date(hj.getFullYear(),hj.getMonth(),0);
   const mesAntIniStr=localDateStr(mesAntIni), mesAntFimStr=localDateStr(mesAntFim);
@@ -3054,14 +2976,8 @@ function renderRelatorio(filtered){
     const porFin={}; FINS.forEach(f=>porFin[f]=0);
     allSales.forEach(s=>{
       const sd=s.saleDate?localDateStr(s.saleDate):null;
-      if(sd && sd>=iniStr && sd<=fimStr){
-        vendaVal+=s.value; vendaQtd++;
-        if(porFin[s.financeira]!==undefined) porFin[s.financeira]+=s.value;
-      }
-      if(s.recebido && s.dataRecebimento){
-        const dr=localDateStr(s.dataRecebimento);
-        if(dr>=iniStr && dr<=fimStr) recebVal+=s.value;
-      }
+      if(sd && sd>=iniStr && sd<=fimStr){ vendaVal+=s.value; vendaQtd++; if(porFin[s.financeira]!==undefined) porFin[s.financeira]+=s.value; }
+      if(s.recebido && s.dataRecebimento){ const dr=localDateStr(s.dataRecebimento); if(dr>=iniStr && dr<=fimStr) recebVal+=s.value; }
     });
     return {vendaVal,vendaQtd,recebVal,porFin};
   }
@@ -3069,20 +2985,9 @@ function renderRelatorio(filtered){
   const cAnt=statsPeriodo(mesAntIniStr,mesAntFimStr);
   const variacao=(a,b)=> b===0 ? (a>0?100:0) : ((a-b)/b*100);
   const seta=v=> v>0.5?"▲":v<-0.5?"▼":"▬";
-  const corVar=v=> v>0.5?"#22c55e":v<-0.5?"#ef4444":"#94a3b8";
-  function cardComp(label,atual,ant,ehMoeda){
-    const v=variacao(atual,ant);
-    const val=ehMoeda?fmt(atual):atual;
-    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;flex:1;min-width:160px">
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">${label}</div>
-      <div style="font-size:24px;font-weight:800;color:var(--text)">${val}</div>
-      <div style="font-size:12px;margin-top:6px;color:${corVar(v)};font-weight:700">
-        ${seta(v)} ${Math.abs(v).toFixed(1)}% <span style="color:var(--muted);font-weight:400">vs mês anterior (${ehMoeda?fmt(ant):ant})</span>
-      </div>
-    </div>`;
-  }
+  const corVar=v=> v>0.5?"#15803d":v<-0.5?"#b91c1c":"#64748b";
 
-  // ── #8 RANKING DE VENDEDORES (mês atual) ──
+  // ── Ranking de vendedores (mês) ──
   const rankVend={};
   allSales.forEach(s=>{
     const sd=s.saleDate?localDateStr(s.saleDate):null;
@@ -3096,165 +3001,213 @@ function renderRelatorio(filtered){
   const maxVal=rankArr.length?rankArr[0][1].val:1;
   const medalhas=["🥇","🥈","🥉"];
 
-  // Guarda contexto para a Análise IA
   window._relCtxIA={ mesAtual:MONTHS[hj.getMonth()], compAtual:cAtual, compAnterior:cAnt,
     semana:{previsto:sem.prevTot,recebido:sem.recTot,aparelhos:sem.prevQtd},
     mes:{previsto:mes.prevTot,recebido:mes.recTot,aparelhos:mes.prevQtd,porFinanceira:mes.prev},
     ranking:rankArr.slice(0,5).map(([n,d])=>({vendedor:n,qtd:d.qtd,valor:d.val})) };
 
-  el.innerHTML=`
-  <!-- CABEÇALHO -->
-  <div style="border:2px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:22px">
-    <div style="background:linear-gradient(135deg,#0a1224,#0f2a1a);padding:22px 26px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+  // ════════ HELPERS DE UI (estilo Atlas: branco, azul, dourado) ════════
+  // Card base branco com borda fina
+  const card = (inner,extra="") => `<div style="background:#fff;border:1px solid ${LINE};border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(11,42,91,.06);${extra}">${inner}</div>`;
+  // Cabeçalho de seção (faixa azul Atlas com filete dourado)
+  const secHead = (icon,titulo,sub) => `
+    <div style="background:linear-gradient(135deg,${NAVY},${NAVY2});padding:14px 20px;border-bottom:3px solid ${GOLD}">
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="font-size:20px">${icon}</span>
         <div>
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#4ade80;margin-bottom:4px">Documento Financeiro Oficial</div>
-          <div style="font-size:22px;font-weight:800;color:#fff">RELATÓRIOS DE RECEBIMENTOS</div>
-          <div style="font-size:13px;color:#94a3b8;margin-top:4px">MercadoFone · Facilita Cell · Controle Financeiro</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;letter-spacing:.4px">${titulo}</div>
+          ${sub?`<div style="font-size:11px;color:#aac4ec;margin-top:2px">${sub}</div>`:""}
         </div>
-        <div style="text-align:right">
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#64748b">Emitido em</div>
-          <div style="font-size:14px;font-weight:700;color:#e2e8f0">${agora}</div>
-          <div style="font-size:11px;color:#64748b;margin-top:2px">Por: ${currentUser?.nome||"—"}</div>
-        </div>
+      </div>
+    </div>`;
+
+  // KPI mini (rótulo + valor)
+  const kpi = (label,valor,cor=NAVY,bg="#fff",sub="") => `
+    <div style="flex:1;min-width:150px;background:${bg};border:1px solid ${LINE};border-radius:12px;padding:14px 16px">
+      <div style="font-size:10.5px;color:#64748b;text-transform:uppercase;letter-spacing:1px;font-weight:700">${label}</div>
+      <div style="font-size:23px;font-weight:800;color:${cor};margin-top:5px;line-height:1.1">${valor}</div>
+      ${sub?`<div style="font-size:11px;color:#94a3b8;margin-top:3px">${sub}</div>`:""}
+    </div>`;
+
+  // Bloco de período (semanal / mensal) — tabela limpa
+  function blocoPeriodo(titulo,subtitulo,icon,data){
+    const ativos=FINS.filter(f=>data.prev[f].qtd>0||data.receb[f].qtd>0);
+    const linhas = ativos.length ? ativos.map((f,i)=>{
+      const c=FC[f];
+      const pctP=data.prevTot>0?(data.prev[f].val/data.prevTot*100):0;
+      return `<tr style="background:${i%2?'#f8fafc':'#fff'}">
+        <td style="padding:11px 16px">
+          <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${c};margin-right:8px;vertical-align:middle"></span>
+          <strong style="color:${NAVY}">${f}</strong>
+        </td>
+        <td style="text-align:center;padding:11px 10px;color:#475569;font-weight:600">${data.prev[f].qtd}</td>
+        <td style="text-align:right;padding:11px 16px;font-weight:700;color:${NAVY};font-variant-numeric:tabular-nums">${fmt(data.prev[f].val)}</td>
+        <td style="text-align:right;padding:11px 16px;font-weight:700;color:${data.receb[f].val>0?'#15803d':'#cbd5e1'};font-variant-numeric:tabular-nums">${fmt(data.receb[f].val)}</td>
+        <td style="text-align:right;padding:11px 16px;color:#94a3b8;font-size:12px">${pctP.toFixed(0)}%</td>
+      </tr>`;
+    }).join("") : `<tr><td colspan="5" style="text-align:center;color:#94a3b8;font-style:italic;padding:20px">Nenhum registro neste período</td></tr>`;
+
+    return card(`
+      ${secHead(icon,titulo,subtitulo)}
+      <div style="padding:16px 16px 6px;display:flex;gap:10px;flex-wrap:wrap">
+        ${kpi("📱 Aparelhos",data.prevQtd,NAVY)}
+        ${kpi("A receber (previsto)",fmt(data.prevTot),NAVY,BLUEL)}
+        ${kpi("✅ Já entrou",fmt(data.recTot),"#15803d","#ecfdf3")}
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:6px">
+        <thead>
+          <tr style="background:#fff">
+            <th style="text-align:left;padding:9px 16px;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#94a3b8;border-top:1px solid ${LINE};border-bottom:1px solid ${LINE}">Financeira</th>
+            <th style="text-align:center;padding:9px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#94a3b8;border-top:1px solid ${LINE};border-bottom:1px solid ${LINE}">Qtd</th>
+            <th style="text-align:right;padding:9px 16px;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#94a3b8;border-top:1px solid ${LINE};border-bottom:1px solid ${LINE}">Previsto</th>
+            <th style="text-align:right;padding:9px 16px;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#15803d;border-top:1px solid ${LINE};border-bottom:1px solid ${LINE}">Entrou</th>
+            <th style="text-align:right;padding:9px 16px;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#94a3b8;border-top:1px solid ${LINE};border-bottom:1px solid ${LINE}">%</th>
+          </tr>
+        </thead>
+        <tbody>${linhas}</tbody>
+        <tfoot>
+          <tr style="background:${NAVY}">
+            <td style="padding:12px 16px;font-weight:800;color:#fff">TOTAL</td>
+            <td style="text-align:center;padding:12px 10px;font-weight:800;color:#fff">${data.prevQtd}</td>
+            <td style="text-align:right;padding:12px 16px;font-weight:800;color:${GOLDL};font-variant-numeric:tabular-nums">${fmt(data.prevTot)}</td>
+            <td style="text-align:right;padding:12px 16px;font-weight:800;color:#86efac;font-variant-numeric:tabular-nums">${fmt(data.recTot)}</td>
+            <td style="text-align:right;padding:12px 16px;color:#aac4ec">100%</td>
+          </tr>
+        </tfoot>
+      </table>
+    `);
+  }
+
+  const el=document.getElementById("rel-7dias");
+  el.innerHTML=`
+  <div style="max-width:1180px;color:${INK}">
+
+  <!-- CABEÇALHO ATLAS -->
+  <div style="background:linear-gradient(135deg,${NAVY} 0%,${NAVY2} 100%);border-radius:16px;padding:24px 28px;margin-bottom:22px;position:relative;overflow:hidden;border-bottom:4px solid ${GOLD}">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;position:relative;z-index:1">
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:3px;color:${GOLD};font-weight:700;margin-bottom:6px">Atlas Recebimentos · Documento Oficial</div>
+        <div style="font-size:24px;font-weight:800;color:#fff;letter-spacing:.5px">Relatório de Recebimentos</div>
+        <div style="font-size:12.5px;color:#aac4ec;margin-top:4px">Resumo financeiro semanal e mensal</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#7f9ed0">Emitido em</div>
+        <div style="font-size:14px;font-weight:700;color:#fff">${agora}</div>
+        <div style="font-size:11px;color:#7f9ed0;margin-top:2px">Por: ${currentUser?.nome||"—"}</div>
       </div>
     </div>
   </div>
 
-  <!-- DOIS RELATÓRIOS LADO A LADO -->
-  <div class="rel-dois" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
-    ${blocoRelatorio(
-      "Relatório Semanal","Últimos 7 dias · "+fmtSemDia(semIni)+" a "+fmtSemDia(hj),
-      "📊",sem,"#6366f1")}
-    ${blocoRelatorio(
-      "Relatório Mensal","Mês de "+MONTHS[hj.getMonth()]+" ("+diasNoMes+" dias) · "+fmtSemDia(mesIni)+" a "+fmtSemDia(mesFim),
-      "📅",mes,"#f59e0b")}
+  <!-- RESUMO RÁPIDO (4 números principais) -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+    ${kpi("📅 Próx. 7 dias",fmt(dias7.reduce((a,[,i])=>a+i.total,0)),NAVY,BLUEL,"previsto a entrar")}
+    ${kpi("📊 Semana",fmt(sem.prevTot),NAVY,"#fff",sem.prevQtd+" recebimentos")}
+    ${kpi("📦 Vendas do mês",fmt(cAtual.vendaVal),"#9a7d1e","#fdf6e3",cAtual.vendaQtd+" aparelhos")}
+    ${kpi("✅ Recebido no mês",fmt(mes.recTot),"#15803d","#ecfdf3",mes.recQtd+" confirmados")}
   </div>
 
-  <!-- #9 ANÁLISE IA -->
-  <div style="border:1px solid var(--violet);border-left-width:3px;border-radius:14px;overflow:hidden;margin-bottom:24px;background:var(--card)">
-    <div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-      <div style="display:flex;align-items:center;gap:10px">
+  <!-- SEMANAL + MENSAL LADO A LADO -->
+  <div class="rel-dois" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px">
+    ${blocoPeriodo("Relatório Semanal","Últimos 7 dias · "+fmtSemDia(semIni)+" a "+fmtSemDia(hj),"📊",sem)}
+    ${blocoPeriodo("Relatório Mensal","Mês de "+MONTHS[hj.getMonth()]+" ("+diasNoMes+" dias)","📅",mes)}
+  </div>
+
+  <!-- ANÁLISE IA -->
+  ${card(`
+    <div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-left:4px solid ${GOLD}">
+      <div style="display:flex;align-items:center;gap:11px">
         <span style="font-size:20px">🧠</span>
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px">Análise Inteligente <span style="font-size:10px;font-weight:500;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:10px;margin-left:4px">Groq</span></div>
-          <div style="font-size:11px;color:var(--muted)">A IA lê os números e resume o que importa</div>
+          <div style="font-size:13px;font-weight:800;color:${NAVY}">Análise Inteligente</div>
+          <div style="font-size:11px;color:#94a3b8">A IA lê os números e resume o que importa</div>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="analisarRelatorioIA()" id="btn-analise-ia">✨ Gerar análise</button>
+      <button onclick="analisarRelatorioIA()" id="btn-analise-ia" style="background:linear-gradient(135deg,${NAVY},${NAVY2});color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font)">✨ Gerar análise</button>
     </div>
-    <div id="rel-analise-ia" style="padding:0 20px 18px;font-size:14px;color:var(--sub);line-height:1.7;display:none"></div>
-  </div>
+    <div id="rel-analise-ia" style="padding:0 20px 18px;font-size:14px;color:#334155;line-height:1.7;display:none"></div>
+  `,"margin-bottom:22px")}
 
-  <!-- #7 COMPARATIVO DE PERÍODOS -->
-  <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px">
-    <div style="background:var(--surface);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
-      <span style="font-size:18px">📈</span>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px">Comparativo — ${MONTHS[hj.getMonth()]} vs ${MONTHS[(hj.getMonth()+11)%12]}</div>
-        <div style="font-size:11px;color:var(--muted)">Evolução do mês atual contra o mês anterior</div>
-      </div>
-    </div>
+  <!-- COMPARATIVO -->
+  ${card(`
+    ${secHead("📈","Comparativo de Períodos","Mês atual vs mês anterior")}
     <div style="padding:18px 20px;display:flex;gap:14px;flex-wrap:wrap">
-      ${cardComp("Aparelhos vendidos",cAtual.vendaQtd,cAnt.vendaQtd,false)}
-      ${cardComp("Valor vendido",cAtual.vendaVal,cAnt.vendaVal,true)}
-      ${cardComp("Valor recebido",cAtual.recebVal,cAnt.recebVal,true)}
+      ${[["Aparelhos vendidos",cAtual.vendaQtd,cAnt.vendaQtd,false],["Valor vendido",cAtual.vendaVal,cAnt.vendaVal,true],["Valor recebido",cAtual.recebVal,cAnt.recebVal,true]].map(([lab,a,b,moeda])=>{
+        const v=variacao(a,b);
+        return `<div style="flex:1;min-width:170px;background:#f8fafc;border:1px solid ${LINE};border-radius:12px;padding:15px 17px">
+          <div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.8px;font-weight:700">${lab}</div>
+          <div style="font-size:24px;font-weight:800;color:${NAVY};margin-top:5px">${moeda?fmt(a):a}</div>
+          <div style="font-size:12px;margin-top:6px;color:${corVar(v)};font-weight:700">${seta(v)} ${Math.abs(v).toFixed(1)}% <span style="color:#94a3b8;font-weight:400">vs ${moeda?fmt(b):b}</span></div>
+        </div>`;
+      }).join("")}
     </div>
-    <div style="padding:0 20px 18px">
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Por financeira (valor vendido)</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${FINS.map(f=>{
-          const a=cAtual.porFin[f]||0, b=cAnt.porFin[f]||0, v=variacao(a,b);
-          const c=FIN_COLORS[f]||"#94a3b8";
-          return `<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <span style="min-width:90px;font-weight:700;color:${c}">${f}</span>
-            <span style="font-family:'Courier New',monospace;font-weight:700;color:var(--text);min-width:110px">${fmt(a)}</span>
-            <span style="font-size:12px;color:${corVar(v)};font-weight:700">${seta(v)} ${Math.abs(v).toFixed(1)}%</span>
-            <span style="font-size:11px;color:var(--muted)">mês passado: ${fmt(b)}</span>
-          </div>`;
-        }).join("")}
-      </div>
-    </div>
-  </div>
+  `,"margin-bottom:22px")}
 
-  <!-- #8 RANKING DE VENDEDORES -->
-  <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px">
-    <div style="background:var(--surface);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
-      <span style="font-size:18px">🏆</span>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px">Ranking de Vendedores — ${MONTHS[hj.getMonth()]}</div>
-        <div style="font-size:11px;color:var(--muted)">Quem mais vendeu no mês (valor e aparelhos)</div>
-      </div>
-    </div>
+  <!-- RANKING -->
+  ${card(`
+    ${secHead("🏆","Ranking de Vendedores","Quem mais vendeu em "+MONTHS[hj.getMonth()])}
     <div style="padding:8px 0">
     ${rankArr.length===0
-      ?`<div style="padding:24px;text-align:center;color:var(--muted);font-style:italic">Nenhuma venda registrada neste mês.</div>`
+      ?`<div style="padding:22px;text-align:center;color:#94a3b8;font-style:italic">Nenhuma venda registrada neste mês.</div>`
       :rankArr.map(([nome,d],i)=>{
         const pct=(d.val/maxVal*100).toFixed(0);
-        const medal=medalhas[i]||`<span style="display:inline-block;width:22px;text-align:center;color:var(--muted);font-weight:700">${i+1}</span>`;
-        return `<div style="padding:11px 20px;border-bottom:${i<rankArr.length-1?"1px solid var(--border)":"none"}">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+        const medal=medalhas[i]||`<span style="display:inline-block;width:22px;text-align:center;color:#94a3b8;font-weight:700">${i+1}</span>`;
+        return `<div style="padding:11px 20px;border-bottom:${i<rankArr.length-1?"1px solid "+LINE:"none"}">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:7px">
             <div style="display:flex;align-items:center;gap:10px">
               <span style="font-size:18px">${medal}</span>
-              <span style="font-weight:700;color:var(--text)">${nome}</span>
-              <span style="font-size:11px;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:10px">📱 ${d.qtd}</span>
+              <span style="font-weight:700;color:${NAVY}">${nome}</span>
+              <span style="font-size:11px;color:#64748b;background:#f1f5f9;padding:2px 9px;border-radius:10px">📱 ${d.qtd}</span>
             </div>
-            <span style="font-family:'Courier New',monospace;font-weight:800;color:#10b981">${fmt(d.val)}</span>
+            <span style="font-weight:800;color:${NAVY};font-variant-numeric:tabular-nums">${fmt(d.val)}</span>
           </div>
-          <div style="height:6px;background:var(--surface);border-radius:4px;overflow:hidden">
-            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#6366f1,#10b981);border-radius:4px"></div>
+          <div style="height:7px;background:#eef2f7;border-radius:4px;overflow:hidden">
+            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,${NAVY},${GOLD});border-radius:4px"></div>
           </div>
         </div>`;
       }).join("")}
     </div>
-  </div>
+  `,"margin-bottom:22px")}
 
   <!-- PRÓXIMOS 7 DIAS -->
-  <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px">
-    <div style="background:var(--surface);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
-      <span style="font-size:18px">🔮</span>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px">Previsão — Próximos 7 Dias</div>
-        <div style="font-size:11px;color:var(--muted)">${fmtSemDia(hj)} a ${fmtSemDia(new Date(limit))}</div>
-      </div>
-    </div>
+  ${card(`
+    ${secHead("🔮","Previsão — Próximos 7 Dias",fmtSemDia(hj)+" a "+fmtSemDia(new Date(limit)))}
     <div>
     ${dias7.length===0
-      ?`<div style="padding:24px;text-align:center;color:var(--muted);font-style:italic">Sem recebimentos previstos nos próximos 7 dias.</div>`
+      ?`<div style="padding:22px;text-align:center;color:#94a3b8;font-style:italic">Sem recebimentos previstos nos próximos 7 dias.</div>`
       :dias7.map(([dk,info],i)=>{
         const d=new Date(dk+"T00:00:00");
         const ehHoje=dk===hjStr;
-        const bg=ehHoje?"linear-gradient(135deg,#0f2417,#052e16)":"transparent";
-        const borderB=i<dias7.length-1?"1px solid var(--border)":"none";
-        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:${bg};border-bottom:${borderB};flex-wrap:wrap;gap:8px">
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:13px 20px;background:${ehHoje?'#fdf6e3':'#fff'};border-bottom:${i<dias7.length-1?"1px solid "+LINE:"none"};flex-wrap:wrap;gap:8px">
           <div>
-            <div style="font-size:13px;font-weight:600;color:${ehHoje?"#4ade80":"var(--text)"}">
+            <div style="font-size:13px;font-weight:700;color:${ehHoje?'#9a7d1e':NAVY}">
               ${ehHoje?"🔔 HOJE – ":""}${WEEKDAYS[d.getDay()]}, ${d.toLocaleDateString("pt-BR",{day:"2-digit",month:"long"})}
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
-              ${Object.entries(info.fins).map(([f,v])=>`<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:${FIN_COLORS[f]||"#333"}22;color:${FIN_COLORS[f]||"#94a3b8"};border:1px solid ${FIN_COLORS[f]||"#333"}44">${f}: ${fmt(v)}</span>`).join("")}
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px">
+              ${Object.entries(info.fins).map(([f,v])=>`<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:${(FC[f]||'#64748b')}18;color:${FC[f]||'#64748b'};font-weight:600">${f}: ${fmt(v)}</span>`).join("")}
             </div>
           </div>
-          <div style="font-size:${ehHoje?"26px":"18px"};font-weight:800;color:${ehHoje?"#4ade80":"#10b981"}">${fmt(info.total)}</div>
+          <div style="font-size:${ehHoje?'22px':'17px'};font-weight:800;color:${ehHoje?'#9a7d1e':NAVY};font-variant-numeric:tabular-nums">${fmt(info.total)}</div>
         </div>`;
       }).join("")}
     </div>
-    ${dias7.length>0?`<div style="padding:12px 20px;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:12px;color:var(--muted)">Total previsto no período</span>
-      <span style="font-size:16px;font-weight:800;color:#10b981;font-family:'Courier New',monospace">${fmt(dias7.reduce((a,[,i])=>a+i.total,0))}</span>
+    ${dias7.length>0?`<div style="padding:12px 20px;background:${NAVY};display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:12px;color:#aac4ec">Total previsto no período</span>
+      <span style="font-size:16px;font-weight:800;color:${GOLDL};font-variant-numeric:tabular-nums">${fmt(dias7.reduce((a,[,i])=>a+i.total,0))}</span>
     </div>`:""}
-  </div>
+  `,"margin-bottom:22px")}
 
   <!-- RODAPÉ -->
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:16px 20px;border:1px dashed var(--border);border-radius:12px">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:16px 20px;border:1px dashed ${LINE};border-radius:12px;background:#fff">
     <div>
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Documento gerado automaticamente pelo sistema</div>
-      <div style="font-size:12px;color:var(--sub);margin-top:3px">MercadoFone · Facilita Cell · ${agora}</div>
+      <div style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px">Documento gerado automaticamente</div>
+      <div style="font-size:12px;color:#475569;margin-top:3px">Atlas Recebimentos · ${agora}</div>
     </div>
     <div style="text-align:right">
-      <div style="font-size:11px;color:var(--muted)">Emitido por</div>
-      <div style="font-size:13px;font-weight:700;color:var(--text)">${currentUser?.nome||"—"}</div>
+      <div style="font-size:11px;color:#94a3b8">Emitido por</div>
+      <div style="font-size:13px;font-weight:700;color:${NAVY}">${currentUser?.nome||"—"}</div>
     </div>
+  </div>
+
   </div>
   `;
 }
